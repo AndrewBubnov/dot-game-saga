@@ -8,3 +8,4 @@ When a player or computer paints >50% of all possible squares in his color - he 
 An inscription appears between the control buttons and the playing field that the player (the name he entered) / computer won.
 Button PLAY changes the caption to PLAY AGAIN.
 Result of the game are send to API and results in table are auto update. In case of server/internet error a modal popup informs user offering him to try again.
+Used React, Redux, redux-saga.
