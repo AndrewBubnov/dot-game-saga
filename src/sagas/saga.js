@@ -1,16 +1,17 @@
 import {
-    CALL_PRESETS_SAGA,
+    CALL_PRESETS,
     SET_PRESETS,
-    CALL_LEADER_BOARD_SAGA,
+    CALL_LEADER_BOARD,
     SET_LEADER_BOARD,
-    END_GAME,
-    SET_WINNER, SET_START_GAME, SET_STARTED
+    CALL_END_GAME,
+    SET_WINNER,
+    CALL_START_GAME,
+    SET_STARTED
 } from '../actions/actions'
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import axios from "axios";
 import { getScore, getName, getField } from "../store";
 import {resetGame, setInitialField, setModalOpen, setNextGame} from "../actions/actionCreators";
-
 
 
 export const presetUrl = 'http://starnavi-frontend-test-task.herokuapp.com/game-settings'
@@ -19,12 +20,13 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 
+
 export function* rootSaga () {
     yield all ([
-        takeLatest(CALL_PRESETS_SAGA, getPresets),
-        takeLatest(CALL_LEADER_BOARD_SAGA, getLeaderBoard),
-        takeLatest(END_GAME, setWinner),
-        takeLatest(SET_START_GAME, setStartGame),
+        takeLatest(CALL_PRESETS, getPresets),
+        takeLatest(CALL_LEADER_BOARD, getLeaderBoard),
+        takeLatest(CALL_END_GAME, setWinner),
+        takeLatest(CALL_START_GAME, setStartGame),
     ]);
 }
 

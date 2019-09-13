@@ -7,25 +7,25 @@ import {
     SET_ERROR_MESSAGE,
     SET_SCORE,
     SET_GAME_FIELD,
-    END_GAME,
-    SET_START_GAME,
+    CALL_END_GAME,
+    CALL_START_GAME,
     SET_NEXT_GAME,
-    CALL_PRESETS_SAGA,
-    CALL_LEADER_BOARD_SAGA
+    CALL_PRESETS,
+    CALL_LEADER_BOARD
 } from '../actions/actions'
 
 
 
-export const setStart = () => ({type: SET_START_GAME})                 //redux-saga call
+export const setStart = () => ({type: CALL_START_GAME})                 //redux-saga call
 //**********************
 
-export const getPresetsFromServer =  () => ({type: CALL_PRESETS_SAGA}) //redux-saga call
+export const getPresetsFromServer =  () => ({type: CALL_PRESETS}) //redux-saga call
 //**********************
 
-export const setEndGame = () => ({type: END_GAME})                     //redux-saga call
+export const setEndGame = () => ({type: CALL_END_GAME})                     //redux-saga call
 //**********************
 
-export const getLeaderBoard = () => ({type: CALL_LEADER_BOARD_SAGA})   //redux-saga call
+export const getLeaderBoard = () => ({type: CALL_LEADER_BOARD})   //redux-saga call
 //**********************
 
 export const setPresets = (preset) => {
