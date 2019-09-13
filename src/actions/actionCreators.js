@@ -16,24 +16,24 @@ import {
 
 
 
+export const setStart = () => ({type: SET_START_GAME})                 //redux-saga call
+//**********************
+
+export const getPresetsFromServer =  () => ({type: CALL_PRESETS_SAGA}) //redux-saga call
+//**********************
+
+export const setEndGame = () => ({type: END_GAME})                     //redux-saga call
+//**********************
+
+export const getLeaderBoard = () => ({type: CALL_LEADER_BOARD_SAGA})   //redux-saga call
+//**********************
+
 export const setPresets = (preset) => {
     return dispatch => {
         dispatch({type: SET_FIELD, payload: preset.field})
         dispatch({type: SET_DELAY, payload: preset.delay})
     }
 }
-//**********************
-
-export const setStart = () => ({type: SET_START_GAME})
-//**********************
-
-export const getPresetsFromServer =  () => ({type: CALL_PRESETS_SAGA})
-//**********************
-
-export const setEndGame = () => ({type: END_GAME})
-//**********************
-
-export const getLeaderBoard = () => ({type: CALL_LEADER_BOARD_SAGA})
 //**********************
 
 export const handleChange = (e, name) => {
