@@ -16,13 +16,13 @@ import {
 
 
 
-export const setStart = () => ({type: CALL_START_GAME})                 //redux-saga call
+export const setStart = () => ({type: CALL_START_GAME})           //redux-saga call
 //**********************
 
 export const getPresetsFromServer =  () => ({type: CALL_PRESETS}) //redux-saga call
 //**********************
 
-export const setEndGame = () => ({type: CALL_END_GAME})                     //redux-saga call
+export const setEndGame = () => ({type: CALL_END_GAME})           //redux-saga call
 //**********************
 
 export const getLeaderBoard = () => ({type: CALL_LEADER_BOARD})   //redux-saga call
