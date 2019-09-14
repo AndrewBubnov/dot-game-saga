@@ -3,6 +3,7 @@ import rootReducer from './reducers/index'
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from './sagas/saga'
 import thunk from 'redux-thunk'
+
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [thunk, sagaMiddleware];
 
@@ -16,8 +17,5 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-export const getScore = (state) => state.score
-export const getName = (state) => state.values.name
-export const getField = (state) => state.field
 
 export default store;

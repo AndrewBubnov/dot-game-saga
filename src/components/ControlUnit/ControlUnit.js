@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
-import { setPresets, setStart, getPresetsFromServer, handleChange } from '../../actions/actionCreators'
+import { setStart, getPresetsFromServer, handleChange } from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
 import {controlStyles as useStyles} from '../../styles/styles'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -71,7 +71,6 @@ const mapStateToProps = (state) => {
 }
 
 ControlUnit.propTypes = {
-    setPresets: PropTypes.func,
     setStartGame: PropTypes.func,
     getPresetsFromServer: PropTypes.func,
     handleChange: PropTypes.func,
@@ -100,4 +99,4 @@ ControlUnit.propTypes = {
     }),
 }
 
-export default connect(mapStateToProps, {setPresets, setStart, getPresetsFromServer, handleChange})(ControlUnit)
+export default connect(mapStateToProps, {setStart, getPresetsFromServer, handleChange})(ControlUnit)

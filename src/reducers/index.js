@@ -1,6 +1,4 @@
 import {
-    SET_FIELD,
-    SET_DELAY,
     SET_STARTED,
     SET_PRESETS,
     SET_NEXT_GAME,
@@ -10,18 +8,20 @@ import {
     SET_ERROR_MESSAGE,
     SET_SCORE,
     SET_GAME_FIELD,
-    SET_WINNER
+    SET_WINNER,
+    SET_RANDOM_INDEX
 } from '../actions/actions'
 
 const initialState = {
-    field: 5,
-    delay: 2000,
     started: false,
     presets: {},
     nextGame: false,
     leaderBoard: [],
     values: {
-        preset: {},
+        preset: {
+            field: 5,
+            delay: 2000,
+        },
         name: ''
     },
     score: {
@@ -32,14 +32,11 @@ const initialState = {
     errorMessage: '',
     gameField: [],
     winner: '',
+    randomIndex: null,
 }
 
 function rootReducer (state = initialState, action) {
     switch (action.type){
-        case SET_DELAY:
-            return {...state, delay: action.payload}
-        case SET_FIELD:
-            return {...state, field: action.payload}
         case SET_STARTED:
             return {...state, started: action.payload}
         case SET_PRESETS:
@@ -58,6 +55,8 @@ function rootReducer (state = initialState, action) {
             return {...state, gameField: action.payload}
         case SET_WINNER:
             return {...state, winner: action.payload}
+        case SET_RANDOM_INDEX:
+            return {...state, randomIndex: action.payload}
         case SET_VALUES:
             return {...state, values: {...state.values, [action.payload.name]: action.payload.value}}
 
