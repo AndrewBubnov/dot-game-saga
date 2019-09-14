@@ -32,7 +32,6 @@ export function* rootSaga () {
     yield all ([
         takeLatest(CALL_PRESETS, getPresets),
         takeLatest(CALL_LEADER_BOARD, getLeaderBoard),
-        takeLatest(CALL_END_GAME, setWinner),
         takeLatest(CALL_START_GAME, setStartGame),
         takeLatest(CALL_USER_CLICK, setUserClick),
         takeLatest(CALL_TICK, setGameProcess),
@@ -105,9 +104,7 @@ function* setUserClick(params) {
         let array = [...yield select(state => state.gameField)]
         array[randomIndex] = 'user'
         yield put ({type: SET_GAME_FIELD, payload: array})
-        const newScore = score.user + 1
-        yield put ({type: SET_SCORE, payload: {...score, user: newScore}})
-        if (newScore > size/2) yield put ({type: CALL_END_GAME})
+        yield addScore(score, 'user', size)
     }
 }
 
@@ -118,9 +115,7 @@ function* setGameProcess() {
         const array = [...gameField]
         if (gameField[randomIndex] === 'current') {
             array[randomIndex] = 'computer'
-            const newScore = score.computer + 1
-            yield put ({type: SET_SCORE, payload: {...score, computer: newScore}})
-            if (newScore > size/2) yield put ({type: CALL_END_GAME})
+            yield addScore(score, 'computer', size)
         }
         let index = null
         while (score.computer <= size/2 || score.user <= size/2) {
@@ -131,4 +126,10 @@ function* setGameProcess() {
         yield put ({type: SET_RANDOM_INDEX, payload: index})
         yield put ({type: SET_GAME_FIELD, payload: array})
     }
+}
+
+function* addScore (score, player, size) {
+    const newScore = score[player] + 1
+    yield put ({type: SET_SCORE, payload: {...score, [player]: newScore}})
+    if (newScore > size/2) yield setWinner()
 }
