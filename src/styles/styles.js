@@ -1,4 +1,14 @@
 import { makeStyles } from "@material-ui/core";
+import grey from "@material-ui/core/colors/grey";
+import { createMuiTheme } from '@material-ui/core/styles';
+
+export const theme = createMuiTheme({
+    palette: {
+        primary: grey,
+    },
+    typography: {useNextVariants: true}
+})
+
 
 export const controlStyles = makeStyles(theme => ({
     root: {
@@ -24,5 +34,8 @@ export const controlStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1),
         marginTop: 8,
         height: 50,
+    },
+    slider: {
+        color: '#808080'
     },
 }));

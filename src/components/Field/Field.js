@@ -22,7 +22,7 @@ const Field = ({values, started, nextGame, resetGame, setInitialField, winner,
            interval = setInterval(setTick, delay)
        }
        return () => clearInterval(interval)
-    }, [started])
+    }, [started, delay])
 
     useEffect(() => {
         setInitialField(size)

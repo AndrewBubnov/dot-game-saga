@@ -10,7 +10,7 @@ import {
     CALL_PRESETS,
     CALL_LEADER_BOARD,
     CALL_USER_CLICK,
-    CALL_TICK
+    CALL_TICK, SET_SLIDER_VALUES
 } from '../actions/actions'
 
 
@@ -65,6 +65,8 @@ export const resetGame = () => {
     }
 }
 //**********************
+export const handleSliderChange = (name, value) => ({type: SET_SLIDER_VALUES, payload: {name, value}})
+
 
 
 
