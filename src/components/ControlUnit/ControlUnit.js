@@ -15,7 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
 
-const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started, handleChange, values, handleSliderChange}) => {
+const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame,
+                         started, handleChange, values, handleSliderChange}) => {
     const {field, delay} = values.preset
     const classes = useStyles();
 
