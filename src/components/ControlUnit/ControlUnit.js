@@ -87,8 +87,8 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started
                         onChange={handleSlider('delay')}
                         value={delay}
                         valueLabelDisplay="auto"
-                        step={200}
-                        min={200}
+                        step={100}
+                        min={700}
                         max={2000}
                     />
                 </MuiThemeProvider>

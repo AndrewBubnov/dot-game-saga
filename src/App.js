@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from "./components/Field/Field";
+import Field from "./components/Field/Field";
 import ControlUnit from "./components/ControlUnit/ControlUnit";
 import LeaderBoard from "./components/LeaderBoard/LeaderBoard";
 import './App.css';
@@ -11,7 +11,7 @@ function App() {
             <div>
                 <ControlUnit />
                 <div style={{display: 'flex'}}>
-                    <Main />
+                    <Field />
                     <LeaderBoard/>
                 </div>
             </div>
