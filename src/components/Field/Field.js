@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { setEndGame, resetGame, setInitialField, onUserClick, setTick } from '../../actions/actionCreators'
+import { resetGame, setInitialField, onUserClick, setTick } from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
 import Cell from "../Cell/Cell";
 import './Field.css'
@@ -53,7 +53,6 @@ const mapStateToProps = (state) => {
 }
 
 Field.propTypes = {
-    setEndGame: PropTypes.func,
     onUserClick: PropTypes.func,
     setTick: PropTypes.func,
     resetGame: PropTypes.func,
@@ -62,4 +61,4 @@ Field.propTypes = {
     started: PropTypes.bool,
 }
 
-export default connect(mapStateToProps, { setEndGame, resetGame, setInitialField, onUserClick, setTick })(Field)
+export default connect(mapStateToProps, { resetGame, setInitialField, onUserClick, setTick })(Field)

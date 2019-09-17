@@ -14,14 +14,10 @@ import {
 } from '../actions/actions'
 
 
-
 export const setStart = () => ({type: CALL_START_GAME})
 //**********************
 
 export const getPresetsFromServer =  () => ({type: CALL_PRESETS})
-//**********************
-
-export const setEndGame = () => ({type: CALL_END_GAME})
 //**********************
 
 export const getLeaderBoard = () => ({type: CALL_LEADER_BOARD})
