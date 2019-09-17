@@ -1,0 +1,9 @@
+.rotated-winner{
+    animation: rotate-winner .3s
+}
+@keyframes rotate-winner {
+    0% {transform: rotate3d(0,1,0, 0deg)}
+    49.9% {transform: rotate3d(0,1,0, 90deg)}
+    50% {transform: rotate3d(0,1,0, 270deg)}
+    to {transform: rotate3d(0,1,0, 360deg)}
+}

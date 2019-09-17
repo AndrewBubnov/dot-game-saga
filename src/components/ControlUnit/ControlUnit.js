@@ -42,6 +42,7 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame,
 
     return (
         <>
+            {!started &&
             <div>
                 <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel ref={inputLabel} htmlFor="presets">
@@ -68,6 +69,7 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame,
                     {nextGame ? 'Play again' : (started ? 'Playing' : 'Play')}
                 </Button>
             </div>
+            }
             <div style={{width: 700}}>
                 <MuiThemeProvider theme={theme}>
                     <Typography gutterBottom className={classes.slider}>

@@ -7,4 +7,12 @@
     flex-direction: column;
     align-items: center;
 }
+.main-container{
+    display: flex;
+}
+.field-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
