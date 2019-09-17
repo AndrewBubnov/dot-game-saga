@@ -60,6 +60,7 @@ export const resetGame = () => {
     }
 }
 //**********************
+
 export const handleSliderChange = (name, value) => ({type: SET_SLIDER_VALUES, payload: {name, value}})
 
 
