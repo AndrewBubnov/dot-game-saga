@@ -21,7 +21,7 @@ const ScoreBoard = ({score: {computer, user}, winner, name}) => {
         <div className='main-container'>
             <div className='score'>
                 <div>Computer : {userName}</div>
-                {winner ? winnerString : scoreString}
+                { winner ? winnerString : scoreString }
             </div>
         </div>
     )
