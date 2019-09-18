@@ -6,22 +6,22 @@ import './ScoreBoard.css'
 
 const ScoreBoard = ({score: {computer, user}, winner, name}) => {
     const userName = name ? name : 'User'
-    let scoreString = (
+    const scoreString = (
         <div style={{display: 'flex'}}>
-            <ScoreItem number={ computer }/>
+            <ScoreItem number={computer}/>
             <span>&nbsp;  :  &nbsp;</span>
-            <ScoreItem number={ user }/>
+            <ScoreItem number={user}/>
         </div>
     )
-    if (winner) {
-        scoreString = winner !== 'Computer' ? <div className='success rotated-winner'>{userName} won</div>
-            : <div className='danger rotated-winner'>computer won</div>
-    }
+
+    const winnerString = winner !== 'Computer' ? <div className='success rotated-winner'>{userName} won</div>
+        : <div className='danger rotated-winner'>computer won</div>
+
     return (
         <div className='main-container'>
             <div className='score'>
-                <div>Computer : { userName }</div>
-                { scoreString }
+                <div>Computer : {userName}</div>
+                {winner ? winnerString : scoreString}
             </div>
         </div>
     )
