@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { resetGame, setInitialField, onUserClick, setTick } from '../../actions/actionCreators'
+import { onUserClick, setTick, setResetGame } from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
 import Cell from "../Cell/Cell";
 import './Field.css'
 
 
 
-const Field = ({values, started, resetGame, setInitialField, gameField, onUserClick, setTick}) => {
+const Field = ({values, started, gameField, onUserClick, setTick, setResetGame}) => {
 
     const {preset: {field = 5, delay = 2000}} = values
-    const size = field*field
-
 
     useEffect(() => {
         let interval = null
@@ -22,8 +20,7 @@ const Field = ({values, started, resetGame, setInitialField, gameField, onUserCl
     }, [started, delay])
 
     useEffect(() => {
-        setInitialField(size)
-        resetGame()
+        setResetGame()
     }, [field])
 
 
@@ -55,10 +52,9 @@ const mapStateToProps = (state) => {
 Field.propTypes = {
     onUserClick: PropTypes.func,
     setTick: PropTypes.func,
-    resetGame: PropTypes.func,
-    setInitialField: PropTypes.func,
+    setResetGame: PropTypes.func,
     gameField: PropTypes.arrayOf(PropTypes.string),
     started: PropTypes.bool,
 }
 
-export default connect(mapStateToProps, { resetGame, setInitialField, onUserClick, setTick })(Field)
+export default connect(mapStateToProps, { onUserClick, setTick, setResetGame })(Field)
