@@ -12,7 +12,7 @@ const Field = ({values, started, gameField, onUserClick, setTick, setResetGame})
     const {preset: {field = 5, delay = 2000}} = values
 
     useEffect(() => {
-        let interval = null
+       let interval = null
        if (started){
            interval = setInterval(setTick, delay)
        }

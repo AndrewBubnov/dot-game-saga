@@ -36,5 +36,3 @@ export const handleChange = (e, name) => ({type: SET_VALUES, payload: {name, val
 //**********************
 
 export const handleSliderChange = (name, value) => ({type: SET_SLIDER_VALUES, payload: {name, value}})
-
-

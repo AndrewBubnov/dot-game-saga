@@ -151,7 +151,7 @@ function* setResetGame() {
 }
 
 function* setInitialField () {
-    const { values: {preset: {field}} } = yield select (state => state)
+    const field = yield select (state => state.values.preset.field)
     const gameField = (Array.from({length: field*field}, v => ''))
     yield put ({type: SET_GAME_FIELD, payload: gameField})
 }
