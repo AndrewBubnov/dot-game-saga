@@ -66,6 +66,7 @@ function* getPresets() {
 function* getLeaderBoard() {
     try {
         const response = yield call (() => axios.get(winnerUrl))
+        if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
         yield put ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         yield put ({type: SET_MODAL_OPEN, payload: true})
@@ -91,6 +92,7 @@ function* setWinner() {
     yield put ({type: SET_NEXT_GAME, payload: true})
     try {
         const response = yield call(() => axios.post(winnerUrl, {winner, date: dateTime}))
+        if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
         yield put ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         yield put ({type: SET_MODAL_OPEN, payload: true})

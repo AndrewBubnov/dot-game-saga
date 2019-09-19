@@ -36,36 +36,61 @@ const initialState = {
     randomIndex: null,
 }
 
-function rootReducer (state = initialState, action) {
-    switch (action.type){
+function rootReducer (state = initialState, {type, payload}) {
+    switch (type){
         case SET_STARTED:
-            return {...state, started: action.payload}
+            return {...state, started: payload}
         case SET_PRESETS:
-            return {...state, presets: action.payload}
+            return {...state, presets: payload}
         case SET_NEXT_GAME:
-            return {...state, nextGame: action.payload}
+            return {...state, nextGame: payload}
         case SET_LEADER_BOARD:
-            return {...state, leaderBoard: action.payload}
+            return {...state, leaderBoard: payload}
         case SET_MODAL_OPEN:
-            return {...state, modalOpen: action.payload}
+            return {...state, modalOpen: payload}
         case SET_ERROR_MESSAGE:
-            return {...state, errorMessage: action.payload}
+            return {...state, errorMessage: payload}
         case SET_SCORE:
-            return {...state, score: action.payload}
+            return {...state, score: payload}
         case SET_GAME_FIELD:
-            return {...state, gameField: action.payload}
+            return {...state, gameField: payload}
         case SET_WINNER:
-            return {...state, winner: action.payload}
+            return {...state, winner: payload}
         case SET_RANDOM_INDEX:
-            return {...state, randomIndex: action.payload}
+            return {...state, randomIndex: payload}
         case SET_VALUES:
-            return {...state, values: {...state.values, [action.payload.name]: action.payload.value}}
+            return {...state, values: {...state.values, [payload.name]: payload.value}}
         case SET_SLIDER_VALUES:
-            return {...state, values: {...state.values, preset: {...state.values.preset, [action.payload.name]: action.payload.value}}}
+            return {...state, values: {...state.values, preset: {...state.values.preset, [payload.name]: payload.value}}}
 
         default:
             return {...state}
     }
 }
+
+// const handlers = {
+//         [SET_STARTED]:       (state, { payload }) => ({...state, started: payload}),
+//         [SET_PRESETS]:       (state, { payload }) => ({...state, presets: payload}),
+//         [SET_NEXT_GAME]:     (state, { payload }) => ({...state, nextGame: payload}),
+//         [SET_LEADER_BOARD]:  (state, { payload }) => ({...state, leaderBoard: payload}),
+//         [SET_MODAL_OPEN]:    (state, { payload }) => ({...state, modalOpen: payload}),
+//         [SET_ERROR_MESSAGE]: (state, { payload }) => ({...state, errorMessage: payload}),
+//         [SET_SCORE]:         (state, { payload }) => ({...state, score: payload}),
+//         [SET_GAME_FIELD]:    (state, { payload }) => ({...state, gameField: payload}),
+//         [SET_WINNER]:        (state, { payload }) => ({...state, winner: payload}),
+//         [SET_RANDOM_INDEX]:  (state, { payload }) => ({...state, randomIndex: payload}),
+//         [SET_VALUES]:        (state, { payload }) =>
+//             ({...state, values: {...state.values, [payload.name]: payload.value}}),
+//         [SET_SLIDER_VALUES]: (state, { payload }) =>
+//             ({...state, values: {...state.values, preset: {...state.values.preset, [payload.name]: payload.value}}}),
+//
+//         DEFAULT: state => ({...state})
+// }
+//
+// const rootReducer = (state = initialState, action) => {
+//     const handle = handlers[action.type] || handlers.DEFAULT
+//     return handle(state, action)
+// }
+
 
 export default rootReducer
