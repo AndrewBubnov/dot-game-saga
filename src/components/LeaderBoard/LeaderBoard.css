@@ -1,7 +1,6 @@
 .leader-board{
     display: flex;
     flex-direction: column;
-    margin-left: 50px;
 }
 .leader-board-item{
     width: 300px;
