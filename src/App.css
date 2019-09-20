@@ -1,6 +1,7 @@
 .App {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .field{
     display: flex;
@@ -9,10 +10,10 @@
 }
 .main-container{
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .field-container{
     display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 

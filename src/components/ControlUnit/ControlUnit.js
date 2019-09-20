@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
-import { connect } from 'react-redux'
-import { setStart, getPresetsFromServer, handleChange, handleSliderChange } from '../../actions/actionCreators'
+import {connect} from 'react-redux'
+import {setStart, getPresetsFromServer, handleChange} from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
-import {controlStyles as useStyles, theme} from '../../styles/styles'
+import {controlStyles as useStyles} from '../../styles/styles'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -10,23 +10,17 @@ import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import './ControlUnit.css'
 
 
-const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame,
-                         started, handleChange, values, handleSliderChange}) => {
-    const {field, delay} = values.preset
+const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started, handleChange, values}) => {
+
     const classes = useStyles();
 
 
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
 
-    const handleSlider = name => (e, value) => {
-        handleSliderChange(name, value)
-    }
 
     useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
@@ -38,65 +32,35 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame,
     }, [getPresetsFromServer])
 
     const presetsList = Object.entries(presets).map(item =>
-        <MenuItem key={item[0]} value={item[1]}>{item[0].split('M')[0]}</MenuItem>)
+        <MenuItem key={item[0]} value={item[1]}>{item[0].split('M')[0] + ' mode'}</MenuItem>)
 
     return (
-        <>
-            {!started &&
-            <div>
-                <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel ref={inputLabel} htmlFor="presets">
-                        Game mode
-                    </InputLabel>
-                    <Select
-                        value={values.preset}
-                        onChange={(e) => handleChange(e, 'preset')}
-                        input={<OutlinedInput labelWidth={labelWidth} name="preset"/>}
-                    >
-                        {presetsList}
-                    </Select>
-                </FormControl>
-                <TextField
-                    label="Name"
-                    className={classes.textField}
-                    value={values.name}
-                    onChange={(e) => handleChange(e, 'name')}
-                    margin="normal"
-                    variant="outlined"
-                    autoComplete="off"
-                />
-                <Button variant="outlined" className={classes.button} onClick={setStart} disabled={started}>
-                    {nextGame ? 'Play again' : (started ? 'Playing' : 'Play')}
-                </Button>
-            </div>
-            }
-            <div style={{width: 700}}>
-                <MuiThemeProvider theme={theme}>
-                    <Typography gutterBottom className={classes.slider}>
-                        Field size
-                    </Typography>
-                    <Slider
-                        onChange={handleSlider('field')}
-                        value={field}
-                        valueLabelDisplay="auto"
-                        step={1}
-                        min={5}
-                        max={20}
-                    />
-                    <Typography gutterBottom className={classes.slider}>
-                        Delay
-                    </Typography>
-                    <Slider
-                        onChange={handleSlider('delay')}
-                        value={delay}
-                        valueLabelDisplay="auto"
-                        step={100}
-                        min={700}
-                        max={2000}
-                    />
-                </MuiThemeProvider>
-            </div>
-        </>
+        <div className='control-unit-container'>
+            <Button variant="outlined" className={classes.button} onClick={setStart} disabled={started}>
+                {nextGame ? 'Play again' : (started ? 'Playing' : 'Play')}
+            </Button>
+            <TextField
+                label="Name"
+                className={classes.textField}
+                value={values.name}
+                onChange={(e) => handleChange(e, 'name')}
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+            />
+            <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel ref={inputLabel} htmlFor="presets">
+                    Game mode
+                </InputLabel>
+                <Select
+                    value={values.preset}
+                    onChange={(e) => handleChange(e, 'preset')}
+                    input={<OutlinedInput labelWidth={labelWidth} name="preset"/>}
+                >
+                    {presetsList}
+                </Select>
+            </FormControl>
+        </div>
     )
 }
 
@@ -139,4 +103,4 @@ ControlUnit.propTypes = {
     }),
 }
 
-export default connect(mapStateToProps, {setStart, getPresetsFromServer, handleChange, handleSliderChange})(ControlUnit)
+export default connect(mapStateToProps, {setStart, getPresetsFromServer, handleChange})(ControlUnit)
