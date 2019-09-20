@@ -13,13 +13,13 @@ import {
     CALL_PRESETS,
     CALL_LEADER_BOARD,
     CALL_USER_CLICK,
-    CALL_TICK,
-    CALL_START_GAME,
     CALL_MODAL_CLOSED,
 } from '../actions/actions'
-import { takeLatest, call, put, all, select } from "redux-saga/effects";
-import axios from "axios";
 
+
+import { takeLatest, call, put, all, select, delay } from "redux-saga/effects";
+import axios from "axios";
+import { dateTime } from "../utils/utils";
 
 
 export const presetUrl = 'http://starnavi-frontend-test-task.herokuapp.com/game-settings'
@@ -27,9 +27,6 @@ export const winnerUrl = 'http://starnavi-frontend-test-task.herokuapp.com/winne
 const presetError = `Can not get presets from server. The mock data will be used.`
 const leaderBoardError = `Can not get leader board from server. Please try to refresh the page.`
 const serverSaveError = `Sorry, something's gone wrong on server. Please try again!`
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
 
 
 
@@ -37,11 +34,10 @@ export function* rootSaga () {
     yield all ([
         takeLatest(CALL_PRESETS, getPresets),
         takeLatest(CALL_LEADER_BOARD, getLeaderBoard),
-        takeLatest(CALL_START_GAME, setStartGame),
         takeLatest(CALL_USER_CLICK, setUserClick),
-        takeLatest(CALL_TICK, setGameProcess),
-        takeLatest(CALL_RESET_GAME, setResetGame),
+        takeLatest(CALL_RESET_GAME, setInitialField),
         takeLatest(CALL_MODAL_CLOSED, setModalClosed),
+        takeLatest(SET_STARTED, callProcess),
     ]);
 }
 
@@ -79,32 +75,19 @@ function* setWinner() {
     const name = yield select (state => state.values.name)
     const user = name ? name : 'User'
     const winner = score.user > score.computer ? user : 'Computer'
-    const dateString = new Date().toLocaleString();
-    const dateArray = dateString.split(',')[0].split('.')
-    dateArray[1] = monthNames[Number(dateArray[1]) - 1]
-    const date = dateArray.join(' ')
-    const time = dateString.split(',')[1].split(':')
-    time.splice(time.length - 1, 1)
-    const dateTime = time.join(':') + ' ' + date
-
-    yield zeroing()
     yield put ({type: SET_WINNER, payload: winner})
+    yield put ({type: SET_SCORE, payload: {computer: 0, user: 0}})
     yield put ({type: SET_NEXT_GAME, payload: true})
     try {
-        const response = yield call(() => axios.post(winnerUrl, {winner, date: dateTime}))
+        const response = yield call(() => axios.post(winnerUrl, {winner, date: dateTime()}))
         if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
         yield put ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         yield put ({type: SET_MODAL_OPEN, payload: true})
         yield put ({type: SET_ERROR_MESSAGE, payload: serverSaveError})
+    } finally {
+        yield put ({type: SET_STARTED, payload: false})
     }
-}
-
-function* setStartGame() {
-    yield setInitialField()
-    yield put ({type: SET_NEXT_GAME, payload: false})
-    yield put ({type: SET_WINNER, payload: ''})
-    yield put ({type: SET_STARTED, payload: true})
 }
 
 function* setUserClick(params) {
@@ -120,7 +103,7 @@ function* setUserClick(params) {
 }
 
 function* setGameProcess() {
-    const { score, gameField, randomIndex, values: {preset: {field}} } = yield select (state => state)
+    const { score, gameField, randomIndex, values: {preset: {field, delay: del}} } = yield select (state => state)
     const size = field*field
     if (score.computer <= size/2 && score.user <= size/2){
         const array = [...gameField]
@@ -136,6 +119,8 @@ function* setGameProcess() {
         array[index] = 'current'
         yield put ({type: SET_RANDOM_INDEX, payload: index})
         yield put ({type: SET_GAME_FIELD, payload: array})
+        yield delay(del)
+        yield setGameProcess()
     }
 }
 
@@ -145,23 +130,24 @@ function* addScore (score, player, size) {
     if (newScore > size/2) yield setWinner()
 }
 
-function* setResetGame() {
-    yield setInitialField()
-    yield zeroing()
-}
-
 function* setInitialField () {
     const field = yield select (state => state.values.preset.field)
     const gameField = (Array.from({length: field*field}, v => ''))
     yield put ({type: SET_GAME_FIELD, payload: gameField})
-}
-
-function* zeroing() {
-    yield put ({type: SET_STARTED, payload: false})
     yield put ({type: SET_SCORE, payload: {computer: 0, user: 0}})
 }
+
 
 function* setModalClosed() {
     yield put ({type: SET_MODAL_OPEN, payload: false})
     yield put ({type: SET_ERROR_MESSAGE, payload: ''})
+}
+
+function* callProcess(params) {
+    if (params.payload) {
+        yield setInitialField()
+        yield put ({type: SET_NEXT_GAME, payload: false})
+        yield put ({type: SET_WINNER, payload: ''})
+        yield setGameProcess()
+    }
 }

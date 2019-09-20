@@ -1,28 +1,17 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { onUserClick, setTick, setResetGame } from '../../actions/actionCreators'
+import { onUserClick, setResetGame } from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
 import Cell from "../Cell/Cell";
 import './Field.css'
 
 
 
-const Field = ({values, started, gameField, onUserClick, setTick, setResetGame}) => {
-
-    const {preset: {field = 5, delay = 2000}} = values
-
-    useEffect(() => {
-       let interval = null
-       if (started){
-           interval = setInterval(setTick, delay)
-       }
-       return () => clearInterval(interval)
-    }, [started, delay])
+const Field = ({ field, gameField, onUserClick, setResetGame }) => {
 
     useEffect(() => {
         setResetGame()
     }, [field])
-
 
     const output = gameField.map((item, index) =>
         <Cell
@@ -43,18 +32,16 @@ const Field = ({values, started, gameField, onUserClick, setTick, setResetGame})
 
 const mapStateToProps = (state) => {
     return {
-        values: state.values,
-        started: state.started,
+        field: state.values.preset.field,
         gameField: state.gameField,
     }
 }
 
 Field.propTypes = {
     onUserClick: PropTypes.func,
-    setTick: PropTypes.func,
     setResetGame: PropTypes.func,
     gameField: PropTypes.arrayOf(PropTypes.string),
     started: PropTypes.bool,
 }
 
-export default connect(mapStateToProps, { onUserClick, setTick, setResetGame })(Field)
+export default connect(mapStateToProps, { onUserClick, setResetGame })(Field)
