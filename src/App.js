@@ -10,13 +10,11 @@ function App() {
     return (
         <div className="App">
             <SliderControlUnit/>
-            <div className='main-container'>
+            <div className='field-container'>
                 <ScoreBoard/>
-                <div className='field-container'>
-                    <ControlUnit/>
-                    <Field/>
-                    <LeaderBoard/>
-                </div>
+                <ControlUnit/>
+                <Field/>
+                <LeaderBoard/>
             </div>
         </div>
     )

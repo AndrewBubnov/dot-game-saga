@@ -18,11 +18,9 @@ const ScoreBoard = ({score: {computer, user}, winner, name}) => {
         : <div className='danger rotated-winner'>computer won</div>
 
     return (
-        <div className='main-container'>
-            <div className='score'>
-                <div>Computer : {userName}</div>
-                { winner ? winnerString : scoreString }
-            </div>
+        <div className='score'>
+            <div>Computer : {userName}</div>
+            {winner ? winnerString : scoreString}
         </div>
     )
 }

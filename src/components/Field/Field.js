@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 import Cell from "../Cell/Cell";
 import './Field.css'
 
-
+const side = window.innerWidth <= 380 ? window.innerWidth *.95 : 700
 
 const Field = ({ field, gameField, onUserClick, setResetGame }) => {
 
@@ -16,14 +16,14 @@ const Field = ({ field, gameField, onUserClick, setResetGame }) => {
     const output = gameField.map((item, index) =>
         <Cell
             key={index}
-            width={700 / field - 4}
-            height={700 / field - 4}
+            width={side / field - 4}
+            height={side / field - 4}
             number={index}
             value={gameField[index]}
         />)
 
     return (
-        <div className='field' onClick={onUserClick}>
+        <div className='field' onClick={onUserClick} style={{width: side, height: side}}>
             {output}
         </div>
     )

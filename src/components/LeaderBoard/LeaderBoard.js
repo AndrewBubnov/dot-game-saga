@@ -1,20 +1,23 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getLeaderBoard} from '../../actions/actionCreators'
+import { getLeaderBoard, deleteWinner } from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
 import Modal from "../Modal/Modal";
 import './LeaderBoard.css'
 
-const LeaderBoard = ({getLeaderBoard, leaderBoard}) => {
+const LeaderBoard = ({ getLeaderBoard, leaderBoard, deleteWinner }) => {
 
     useEffect(() => {
         getLeaderBoard()
-    }, [])
+    }, []);
 
-    const leaderList = leaderBoard.map(item => <div key={item.id} className='leader-board-item'>
-        <div className='record'>Winner: {item.winner}</div>
-        <div className='record'>Date: {item.date}</div>
-    </div>)
+
+    const leaderList = leaderBoard.map(item =>
+        <div key={item._id} className='leader-board-item' onClick={() => deleteWinner(item._id)}>
+            <div className='record'>Winner: {item.winner}</div>
+            <div className='record'>Date: {item.date}</div>
+        </div>);
+
     return (
         <>
             <div className='leader-board'>
@@ -33,6 +36,7 @@ const mapStateToProps = (state) => {
 
 LeaderBoard.propTypes = {
     getLeaderBoard: PropTypes.func,
+    deleteWinner: PropTypes.func,
     leaderBoard: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
         winner: PropTypes.string,
@@ -40,4 +44,4 @@ LeaderBoard.propTypes = {
     })),
 }
 
-export default connect(mapStateToProps, {getLeaderBoard})(LeaderBoard)
+export default connect(mapStateToProps, { getLeaderBoard, deleteWinner })(LeaderBoard)

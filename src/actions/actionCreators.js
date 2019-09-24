@@ -7,6 +7,7 @@ import {
     CALL_USER_CLICK,
     CALL_RESET_GAME,
     CALL_MODAL_CLOSED,
+    DELETE_WINNER
 } from '../actions/actions'
 
 
@@ -32,3 +33,6 @@ export const handleChange = (e, name) => ({type: SET_VALUES, payload: {name, val
 //**********************
 
 export const handleSliderChange = (name, value) => ({type: SET_SLIDER_VALUES, payload: {name, value}})
+//**********************
+
+export const deleteWinner = (_id) => ({type: DELETE_WINNER, payload: _id})

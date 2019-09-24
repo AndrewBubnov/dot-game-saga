@@ -10,32 +10,32 @@ export const theme = createMuiTheme({
 })
 
 
+
 export const controlStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
     },
     formControl: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        marginTop: theme.spacing(7),
         width: '100%',
         height: 50,
+        margin: 0,
+        padding: 0,
     },
     selectEmpty: {
         margin: theme.spacing(2),
     },
     button: {
-        marginLeft: theme.spacing(1),
-        width: '100%',
-        height: 55,
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        marginTop: theme.spacing(7),
         width: '100%',
         height: 50,
+        margin: 0,
+        padding: 0,
+    },
+    textField: {
+        width: '100%',
+        height: 50,
+        margin: 0,
+        padding: 0,
     },
     slider: {
         color: '#808080'

@@ -9,6 +9,7 @@ import {
     SET_NEXT_GAME,
     SET_MODAL_OPEN,
     SET_ERROR_MESSAGE,
+    DELETE_WINNER,
     CALL_RESET_GAME,
     CALL_PRESETS,
     CALL_LEADER_BOARD,
@@ -22,8 +23,10 @@ import axios from "axios";
 import { dateTime } from "../utils/utils";
 
 
-export const presetUrl = 'http://starnavi-frontend-test-task.herokuapp.com/game-settings'
-export const winnerUrl = 'http://starnavi-frontend-test-task.herokuapp.com/winners'
+// export const presetUrl = 'http://starnavi-frontend-test-task.herokuapp.com/game-settings'
+// export const winnerUrl = 'http://starnavi-frontend-test-task.herokuapp.com/winners'
+export const presetUrl = '/api/presets'
+export const winnerUrl = '/api/winner'
 const presetError = `Can not get presets from server. The mock data will be used.`
 const leaderBoardError = `Can not get leader board from server. Please try to refresh the page.`
 const serverSaveError = `Sorry, something's gone wrong on server. Please try again!`
@@ -38,6 +41,7 @@ export function* rootSaga () {
         takeLatest(CALL_RESET_GAME, setInitialField),
         takeLatest(CALL_MODAL_CLOSED, setModalClosed),
         takeLatest(SET_STARTED, callProcess),
+        takeLatest(DELETE_WINNER, deleteWinner),
     ]);
 }
 
@@ -62,11 +66,10 @@ function* getPresets() {
 function* getLeaderBoard() {
     try {
         const response = yield call (() => axios.get(winnerUrl))
-        if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
         yield put ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         yield put ({type: SET_MODAL_OPEN, payload: true})
-        yield put ({type: SET_ERROR_MESSAGE, payload: leaderBoardError})
+        yield put ({type: SET_ERROR_MESSAGE, payload: err.message || leaderBoardError})
     }
 }
 
@@ -80,11 +83,10 @@ function* setWinner() {
     yield put ({type: SET_NEXT_GAME, payload: true})
     try {
         const response = yield call(() => axios.post(winnerUrl, {winner, date: dateTime()}))
-        if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
         yield put ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         yield put ({type: SET_MODAL_OPEN, payload: true})
-        yield put ({type: SET_ERROR_MESSAGE, payload: serverSaveError})
+        yield put ({type: SET_ERROR_MESSAGE, payload: err.message || serverSaveError})
     } finally {
         yield put ({type: SET_STARTED, payload: false})
     }
@@ -149,5 +151,15 @@ function* callProcess(params) {
         yield put ({type: SET_NEXT_GAME, payload: false})
         yield put ({type: SET_WINNER, payload: ''})
         yield setGameProcess()
+    }
+}
+
+function* deleteWinner(params) {
+    try {
+        const response  = yield call (() => axios.delete(`api/delete/${params.payload}`))
+        yield put ({type: SET_LEADER_BOARD, payload: response.data})
+    } catch (err) {
+        yield put ({type: SET_MODAL_OPEN, payload: true})
+        yield put ({type: SET_ERROR_MESSAGE, payload: err.message})
     }
 }

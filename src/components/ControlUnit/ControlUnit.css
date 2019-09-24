@@ -1,5 +1,16 @@
 .control-unit-container{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 250px;
     width: 300px;
+    order: 2;
+    margin: 0;
+    padding: 0;
+}
+@media screen and (max-width: 380px) {
+    .control-unit-container {
+        height: 115px;
+        margin-bottom: 10px;
+    }
 }

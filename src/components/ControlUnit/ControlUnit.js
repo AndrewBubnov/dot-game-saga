@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './ControlUnit.css'
 
+const desktop = window.innerWidth > 380
 
 const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started, handleChange, values}) => {
 
@@ -23,7 +24,7 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started
 
 
     useEffect(() => {
-        setLabelWidth(inputLabel.current.offsetWidth);
+        if (desktop) setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
 
 
@@ -48,6 +49,7 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started
                 variant="outlined"
                 autoComplete="off"
             />
+            {desktop &&
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel ref={inputLabel} htmlFor="presets">
                     Game mode
@@ -60,6 +62,7 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started
                     {presetsList}
                 </Select>
             </FormControl>
+            }
         </div>
     )
 }

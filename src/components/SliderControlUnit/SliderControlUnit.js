@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
 
+const side = window.innerWidth <= 380 ? window.innerWidth *.95 : 700
+
 const SliderControlUnit = ({values, handleSliderChange}) => {
     const {field, delay} = values.preset
     const classes = useStyles();
@@ -17,7 +19,7 @@ const SliderControlUnit = ({values, handleSliderChange}) => {
     }
 
     return (
-        <div style={{width: 700}}>
+        <div style={{width: side}}>
             <MuiThemeProvider theme={theme}>
                 <Typography gutterBottom className={classes.slider}>
                     Field size
@@ -28,7 +30,7 @@ const SliderControlUnit = ({values, handleSliderChange}) => {
                     valueLabelDisplay="auto"
                     step={1}
                     min={5}
-                    max={20}
+                    max={15}
                 />
                 <Typography gutterBottom className={classes.slider}>
                     Delay
