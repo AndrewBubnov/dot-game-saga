@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 const mongodb = require('mongodb');
 const url = 'mongodb://AndrewBubnov:acnot88_0175A@cluster0-shard-00-00-edszp.mongodb.net:27017,cluster0-shard-00-01-' +
     'edszp.mongodb.net:27017,cluster0-shard-00-02-edszp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
-const PORT = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 let currentDB;
 let dbConnectionError = false;
 
