@@ -1,4 +1,4 @@
-User sets game difficulty and name,
+User sets game difficulty and defines self name,
 presses PLAY, button gets disabled and changes the caption to PLAYING.
 Game difficulty presets are downloaded from API.
 Also user is able to select presets manualy, including during the game, which will automatically be displayed.
