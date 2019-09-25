@@ -22,11 +22,8 @@ import { takeLatest, call, put, all, select, delay } from "redux-saga/effects";
 import axios from "axios";
 import { dateTime } from "../utils/utils";
 
-
-// export const presetUrl = 'http://starnavi-frontend-test-task.herokuapp.com/game-settings'
-// export const winnerUrl = 'http://starnavi-frontend-test-task.herokuapp.com/winners'
-export const presetUrl = '/api/presets'
-export const winnerUrl = '/api/winner'
+export const presetUrl = 'https://dot-game-api.herokuapp.com/api/presets'
+export const winnerUrl = 'https://dot-game-api.herokuapp.com/api/winner'
 const presetError = `Can not get presets from server. The mock data will be used.`
 const leaderBoardError = `Can not get leader board from server. Please try to refresh the page.`
 const serverSaveError = `Sorry, something's gone wrong on server. Please try again!`
