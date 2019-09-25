@@ -53,7 +53,7 @@ app.delete('/api/delete/:_id', (req, res) => {
 })
 
 
-MongoClient.connect(url, {useNewUrlParser: true}, function (err, db) {
+MongoClient.connect(url, {useUnifiedTopology: true, useNewUrlParser: true},  function (err, db) {
     if (err) dbConnectionError = true;
     console.log("Connected correctly to DB server");
     dbConnectionError = false;
