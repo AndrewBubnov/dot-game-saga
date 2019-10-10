@@ -2,23 +2,23 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ScoreItem from "./ScoreItem/ScoreItem";
 import * as PropTypes from "prop-types";
-import './ScoreBoard.css'
+import styles from './ScoreBoard.module.css'
 
 const ScoreBoard = ({score: {computer, user}, winner, name}) => {
     const userName = name ? name : 'User'
     const scoreString = (
-        <div style={{display: 'flex'}}>
+        <div className={styles.scoreBox}>
             <ScoreItem number={computer}/>
             <span>&nbsp;  :  &nbsp;</span>
             <ScoreItem number={user}/>
         </div>
     )
 
-    const winnerString = winner !== 'Computer' ? <div className='success rotated-winner'>{userName} won</div>
-        : <div className='danger rotated-winner'>computer won</div>
+    const winnerString = winner !== 'Computer' ? <div className={`${styles.success} ${styles.rotatedWinner}`}>{userName} won</div>
+        : <div className={`${styles.danger} ${styles.rotatedWinner}`}>computer won</div>
 
     return (
-        <div className='score'>
+        <div className={styles.score}>
             <div>Computer : {userName}</div>
             {winner ? winnerString : scoreString}
         </div>

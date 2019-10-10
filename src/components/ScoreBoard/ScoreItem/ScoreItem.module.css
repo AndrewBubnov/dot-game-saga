@@ -1,4 +1,4 @@
-.rotated-score{
+.rotatedScore{
     animation: rotate-score .3s
 }
 @keyframes rotate-score {

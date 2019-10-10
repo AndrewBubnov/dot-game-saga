@@ -1,4 +1,4 @@
-.control-unit-container{
+.controlUnitContainer{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -9,7 +9,7 @@
     padding: 0;
 }
 @media screen and (max-width: 380px) {
-    .control-unit-container {
+    .controlUnitContainer {
         height: 115px;
         margin-bottom: 10px;
     }

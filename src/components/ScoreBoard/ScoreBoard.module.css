@@ -1,5 +1,15 @@
-.rotated-winner{
+.rotatedWinner{
+    font-weight: 500;
     animation: rotate-winner .3s
+}
+.success{
+    color: green;
+}
+.danger{
+    color: red;
+}
+.scoreBox{
+    display: flex;
 }
 @keyframes rotate-winner {
     0% {transform: rotate3d(0,1,0, 0deg)}

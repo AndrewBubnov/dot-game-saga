@@ -1,9 +1,9 @@
 import React from 'react'
 import * as PropTypes from "prop-types";
-import './ScoreItem.css'
+import styles from './ScoreItem.module.css'
 
 const ScoreItem = ({ number }) => {
-    return <span className='rotated-score' key={number}>{number}</span>
+    return <span className={styles.rotatedScore} key={number}>{number}</span>
 }
 
 ScoreItem.propTypes = {

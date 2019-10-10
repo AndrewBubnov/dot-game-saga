@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { onUserClick, setResetGame } from '../../actions/actionCreators'
 import * as PropTypes from 'prop-types';
 import Cell from "../Cell/Cell";
-import './Field.css'
+import styles from './Field.module.css'
 
 const side = window.innerWidth <= 380 ? window.innerWidth *.95 : 700
 
@@ -23,7 +23,7 @@ const Field = ({ field, gameField, onUserClick, setResetGame }) => {
         />)
 
     return (
-        <div className='field' onClick={onUserClick} style={{width: side, height: side}}>
+        <div className={styles.field} onClick={onUserClick} style={{width: side, height: side}}>
             {output}
         </div>
     )

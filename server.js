@@ -12,6 +12,7 @@ let dbConnectionError = false;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 app.use(express.static(__dirname + '/build/'));
 
 
@@ -24,7 +25,9 @@ const getUsers = async (req, res) => {
             res.status(503).send("Something wrong's happened on server. Please reload the page")
         }
     } else res.status(503).send('Can not connect to DB at the time. Please try again later')
-}
+};
+
+
 
 app.get('/api/winner', async (req, res) => await getUsers(req,res))
 

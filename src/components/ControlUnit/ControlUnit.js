@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import './ControlUnit.css'
+import styles from './ControlUnit.module.css'
 
 const desktop = window.innerWidth > 380
 
@@ -36,7 +36,7 @@ const ControlUnit = ({setStart, getPresetsFromServer, presets, nextGame, started
         <MenuItem key={item[0]} value={item[1]}>{item[0].split('M')[0] + ' mode'}</MenuItem>)
 
     return (
-        <div className='control-unit-container'>
+        <div className={styles.controlUnitContainer}>
             <Button variant="outlined" className={classes.button} onClick={setStart} disabled={started}>
                 {nextGame ? 'Play again' : (started ? 'Playing' : 'Play')}
             </Button>

@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import * as PropTypes from 'prop-types';
-import './Cell.css'
+import styles from './Cell.module.css'
 
 const Cell = ({ width, height, number, value }) => {
     let background = ''
@@ -8,7 +8,7 @@ const Cell = ({ width, height, number, value }) => {
     else if (value === 'computer') background = '#FF6040'
     else if (value === 'user') background = '#459945'
     return (
-        <div id={'_' + number} className='cell' style={{width, height, background}}>
+        <div id={'_' + number} className={styles.cell} style={{width, height, background}}>
         </div>
     )
 }
